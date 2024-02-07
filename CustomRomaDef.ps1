@@ -1,4 +1,4 @@
-﻿$ime = [IME]::New()
+$ime = [IME]::New()
 
 $ime.createRomaDict()
 $ime.createRomaTxt()
@@ -143,12 +143,12 @@ class IME {
 
         $isUnique = "${enFirstChr}${enSecondChr}" -in $this.uniqueDict.keys
 
-        $isNormal = ` # 清音のみ,,連打促音妨げ回避
+        $isNormal = ` # 清音のみ,,連投撥音上書き回避
             ($enSecondChr -like $VOWEL) `
             -and $hasJpFirstChr `
             -and !($enSecondChr -eq $enFirstChr)
 
-        $isConstracted = ` # 拗音付きのみ,,連打促音妨げ回避,単打撥音妨げ回避
+        $isConstracted = ` # 拗音付きのみ,,連投撥音上書き回避,単キー撥音上書き回避
             (($enSecondChr -like "${CONTRACTED_VOWEL}") -and ($enFirstChr -like $CONTRACTED_CONSONANT)) `
             -and $hasJpFirstChr `
             -and !($enSecondChr -like "${enFirstChr}*") `
